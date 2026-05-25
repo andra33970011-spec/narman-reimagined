@@ -14,6 +14,66 @@ export type Database = {
   }
   public: {
     Tables: {
+      absensi_asn: {
+        Row: {
+          catatan: string | null
+          created_at: string
+          device_info: string | null
+          foto_url: string | null
+          id: string
+          lat: number | null
+          lng: number | null
+          lokasi: string | null
+          opd_id: string | null
+          tipe: string
+          user_id: string
+          waktu: string
+        }
+        Insert: {
+          catatan?: string | null
+          created_at?: string
+          device_info?: string | null
+          foto_url?: string | null
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          lokasi?: string | null
+          opd_id?: string | null
+          tipe: string
+          user_id: string
+          waktu?: string
+        }
+        Update: {
+          catatan?: string | null
+          created_at?: string
+          device_info?: string | null
+          foto_url?: string | null
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          lokasi?: string | null
+          opd_id?: string | null
+          tipe?: string
+          user_id?: string
+          waktu?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "absensi_asn_opd_id_fkey"
+            columns: ["opd_id"]
+            isOneToOne: false
+            referencedRelation: "opd"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "absensi_asn_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       app_setting: {
         Row: {
           key: string
@@ -31,6 +91,147 @@ export type Database = {
           value?: Json
         }
         Relationships: []
+      }
+      aset: {
+        Row: {
+          catatan: string | null
+          created_at: string
+          deskripsi: string | null
+          foto_url: string | null
+          id: string
+          kategori: string
+          kode: string
+          kondisi: string
+          lat: number | null
+          lng: number | null
+          lokasi: string | null
+          lokasi_terkini: string | null
+          merk: string | null
+          nama: string
+          nilai_perolehan: number | null
+          nomor_seri: string | null
+          opd_id: string | null
+          pemegang_user_id: string | null
+          status: Database["public"]["Enums"]["aset_status"]
+          tanggal_perolehan: string | null
+          updated_at: string
+        }
+        Insert: {
+          catatan?: string | null
+          created_at?: string
+          deskripsi?: string | null
+          foto_url?: string | null
+          id?: string
+          kategori?: string
+          kode: string
+          kondisi?: string
+          lat?: number | null
+          lng?: number | null
+          lokasi?: string | null
+          lokasi_terkini?: string | null
+          merk?: string | null
+          nama: string
+          nilai_perolehan?: number | null
+          nomor_seri?: string | null
+          opd_id?: string | null
+          pemegang_user_id?: string | null
+          status?: Database["public"]["Enums"]["aset_status"]
+          tanggal_perolehan?: string | null
+          updated_at?: string
+        }
+        Update: {
+          catatan?: string | null
+          created_at?: string
+          deskripsi?: string | null
+          foto_url?: string | null
+          id?: string
+          kategori?: string
+          kode?: string
+          kondisi?: string
+          lat?: number | null
+          lng?: number | null
+          lokasi?: string | null
+          lokasi_terkini?: string | null
+          merk?: string | null
+          nama?: string
+          nilai_perolehan?: number | null
+          nomor_seri?: string | null
+          opd_id?: string | null
+          pemegang_user_id?: string | null
+          status?: Database["public"]["Enums"]["aset_status"]
+          tanggal_perolehan?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "aset_opd_id_fkey"
+            columns: ["opd_id"]
+            isOneToOne: false
+            referencedRelation: "opd"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "aset_pemegang_user_id_fkey"
+            columns: ["pemegang_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      aset_riwayat: {
+        Row: {
+          aksi: string
+          aset_id: string
+          catatan: string | null
+          created_at: string
+          data: Json | null
+          id: string
+          lat: number | null
+          lng: number | null
+          lokasi_text: string | null
+          oleh: string | null
+        }
+        Insert: {
+          aksi: string
+          aset_id: string
+          catatan?: string | null
+          created_at?: string
+          data?: Json | null
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          lokasi_text?: string | null
+          oleh?: string | null
+        }
+        Update: {
+          aksi?: string
+          aset_id?: string
+          catatan?: string | null
+          created_at?: string
+          data?: Json | null
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          lokasi_text?: string | null
+          oleh?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "aset_riwayat_aset_id_fkey"
+            columns: ["aset_id"]
+            isOneToOne: false
+            referencedRelation: "aset"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "aset_riwayat_oleh_fkey"
+            columns: ["oleh"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       audit_log: {
         Row: {
@@ -209,6 +410,107 @@ export type Database = {
         }
         Relationships: []
       }
+      dataset_submission: {
+        Row: {
+          data: Json
+          id: string
+          oleh_user_id: string
+          opd_id: string | null
+          returned_note: string | null
+          status: string
+          submitted_at: string
+          template_id: string
+          updated_at: string
+        }
+        Insert: {
+          data?: Json
+          id?: string
+          oleh_user_id: string
+          opd_id?: string | null
+          returned_note?: string | null
+          status?: string
+          submitted_at?: string
+          template_id: string
+          updated_at?: string
+        }
+        Update: {
+          data?: Json
+          id?: string
+          oleh_user_id?: string
+          opd_id?: string | null
+          returned_note?: string | null
+          status?: string
+          submitted_at?: string
+          template_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dataset_submission_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "dataset_template"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      dataset_template: {
+        Row: {
+          aktif: boolean
+          allow_multiple_submit: boolean
+          created_at: string
+          created_by: string | null
+          deadline: string | null
+          deskripsi: string | null
+          excel_layout: Json
+          id: string
+          judul: string
+          kode: string | null
+          kolom: Json
+          opd_pemilik_id: string | null
+          target_opd_ids: string[] | null
+          target_role: string
+          target_scope: string
+          updated_at: string
+        }
+        Insert: {
+          aktif?: boolean
+          allow_multiple_submit?: boolean
+          created_at?: string
+          created_by?: string | null
+          deadline?: string | null
+          deskripsi?: string | null
+          excel_layout?: Json
+          id?: string
+          judul: string
+          kode?: string | null
+          kolom?: Json
+          opd_pemilik_id?: string | null
+          target_opd_ids?: string[] | null
+          target_role?: string
+          target_scope?: string
+          updated_at?: string
+        }
+        Update: {
+          aktif?: boolean
+          allow_multiple_submit?: boolean
+          created_at?: string
+          created_by?: string | null
+          deadline?: string | null
+          deskripsi?: string | null
+          excel_layout?: Json
+          id?: string
+          judul?: string
+          kode?: string | null
+          kolom?: Json
+          opd_pemilik_id?: string | null
+          target_opd_ids?: string[] | null
+          target_role?: string
+          target_scope?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       desa: {
         Row: {
           aktif: boolean
@@ -283,6 +585,56 @@ export type Database = {
           status?: Database["public"]["Enums"]["job_status"]
         }
         Relationships: []
+      }
+      kantor_qr: {
+        Row: {
+          aktif: boolean
+          created_at: string
+          id: string
+          label: string | null
+          lat: number | null
+          lng: number | null
+          lokasi: string | null
+          opd_id: string
+          radius_m: number
+          token: string
+          updated_at: string
+        }
+        Insert: {
+          aktif?: boolean
+          created_at?: string
+          id?: string
+          label?: string | null
+          lat?: number | null
+          lng?: number | null
+          lokasi?: string | null
+          opd_id: string
+          radius_m?: number
+          token: string
+          updated_at?: string
+        }
+        Update: {
+          aktif?: boolean
+          created_at?: string
+          id?: string
+          label?: string | null
+          lat?: number | null
+          lng?: number | null
+          lokasi?: string | null
+          opd_id?: string
+          radius_m?: number
+          token?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "kantor_qr_opd_id_fkey"
+            columns: ["opd_id"]
+            isOneToOne: true
+            referencedRelation: "opd"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       kategori_layanan: {
         Row: {
@@ -462,30 +814,39 @@ export type Database = {
           created_at: string
           foto_url: string | null
           id: string
+          is_pimpinan: boolean
           jabatan: string
+          level: string | null
           nama: string
           updated_at: string
           urutan: number
+          user_id: string | null
         }
         Insert: {
           aktif?: boolean
           created_at?: string
           foto_url?: string | null
           id?: string
+          is_pimpinan?: boolean
           jabatan: string
+          level?: string | null
           nama: string
           updated_at?: string
           urutan?: number
+          user_id?: string | null
         }
         Update: {
           aktif?: boolean
           created_at?: string
           foto_url?: string | null
           id?: string
+          is_pimpinan?: boolean
           jabatan?: string
+          level?: string | null
           nama?: string
           updated_at?: string
           urutan?: number
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -641,12 +1002,15 @@ export type Database = {
           created_at: string
           desa: string | null
           id: string
+          jabatan: string | null
           nama_lengkap: string
           nik: string | null
+          nip: string | null
           no_hp: string | null
           opd_id: string | null
           status: string
           updated_at: string
+          username: string | null
           verified_at: string | null
           verified_by: string | null
         }
@@ -654,12 +1018,15 @@ export type Database = {
           created_at?: string
           desa?: string | null
           id: string
+          jabatan?: string | null
           nama_lengkap?: string
           nik?: string | null
+          nip?: string | null
           no_hp?: string | null
           opd_id?: string | null
           status?: string
           updated_at?: string
+          username?: string | null
           verified_at?: string | null
           verified_by?: string | null
         }
@@ -667,12 +1034,15 @@ export type Database = {
           created_at?: string
           desa?: string | null
           id?: string
+          jabatan?: string | null
           nama_lengkap?: string
           nik?: string | null
+          nip?: string | null
           no_hp?: string | null
           opd_id?: string | null
           status?: string
           updated_at?: string
+          username?: string | null
           verified_at?: string | null
           verified_by?: string | null
         }
@@ -743,6 +1113,224 @@ export type Database = {
         }
         Relationships: []
       }
+      share_komentar: {
+        Row: {
+          created_at: string
+          id: string
+          isi: string
+          oleh_user_id: string
+          paket_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          isi: string
+          oleh_user_id: string
+          paket_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          isi?: string
+          oleh_user_id?: string
+          paket_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "share_komentar_paket_id_fkey"
+            columns: ["paket_id"]
+            isOneToOne: false
+            referencedRelation: "share_paket"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      share_lampiran: {
+        Row: {
+          created_at: string
+          id: string
+          mime_type: string | null
+          nama_file: string
+          paket_id: string
+          size_bytes: number | null
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          mime_type?: string | null
+          nama_file: string
+          paket_id: string
+          size_bytes?: number | null
+          url: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          mime_type?: string | null
+          nama_file?: string
+          paket_id?: string
+          size_bytes?: number | null
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "share_lampiran_paket_id_fkey"
+            columns: ["paket_id"]
+            isOneToOne: false
+            referencedRelation: "share_paket"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      share_paket: {
+        Row: {
+          approval_note: string | null
+          approval_required: boolean
+          approved_at: string | null
+          approver_id: string | null
+          created_at: string
+          dataset_template_id: string | null
+          deskripsi: string | null
+          expires_at: string | null
+          id: string
+          judul: string
+          kode: string | null
+          pengirim_opd_id: string | null
+          pengirim_user_id: string
+          prioritas: string
+          sensitivitas: string
+          status: string
+          tipe: string
+          updated_at: string
+        }
+        Insert: {
+          approval_note?: string | null
+          approval_required?: boolean
+          approved_at?: string | null
+          approver_id?: string | null
+          created_at?: string
+          dataset_template_id?: string | null
+          deskripsi?: string | null
+          expires_at?: string | null
+          id?: string
+          judul: string
+          kode?: string | null
+          pengirim_opd_id?: string | null
+          pengirim_user_id: string
+          prioritas?: string
+          sensitivitas?: string
+          status?: string
+          tipe: string
+          updated_at?: string
+        }
+        Update: {
+          approval_note?: string | null
+          approval_required?: boolean
+          approved_at?: string | null
+          approver_id?: string | null
+          created_at?: string
+          dataset_template_id?: string | null
+          deskripsi?: string | null
+          expires_at?: string | null
+          id?: string
+          judul?: string
+          kode?: string | null
+          pengirim_opd_id?: string | null
+          pengirim_user_id?: string
+          prioritas?: string
+          sensitivitas?: string
+          status?: string
+          tipe?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      share_riwayat: {
+        Row: {
+          aksi: string
+          catatan: string | null
+          created_at: string
+          id: string
+          meta: Json | null
+          oleh_user_id: string | null
+          paket_id: string
+        }
+        Insert: {
+          aksi: string
+          catatan?: string | null
+          created_at?: string
+          id?: string
+          meta?: Json | null
+          oleh_user_id?: string | null
+          paket_id: string
+        }
+        Update: {
+          aksi?: string
+          catatan?: string | null
+          created_at?: string
+          id?: string
+          meta?: Json | null
+          oleh_user_id?: string | null
+          paket_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "share_riwayat_paket_id_fkey"
+            columns: ["paket_id"]
+            isOneToOne: false
+            referencedRelation: "share_paket"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      share_target: {
+        Row: {
+          created_at: string
+          dibuka_at: string | null
+          dibuka_oleh: string | null
+          id: string
+          paket_id: string
+          status_baca: string
+          target_opd_id: string | null
+          target_pejabat_id: string | null
+          target_type: string
+          target_user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          dibuka_at?: string | null
+          dibuka_oleh?: string | null
+          id?: string
+          paket_id: string
+          status_baca?: string
+          target_opd_id?: string | null
+          target_pejabat_id?: string | null
+          target_type: string
+          target_user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          dibuka_at?: string | null
+          dibuka_oleh?: string | null
+          id?: string
+          paket_id?: string
+          status_baca?: string
+          target_opd_id?: string | null
+          target_pejabat_id?: string | null
+          target_type?: string
+          target_user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "share_target_paket_id_fkey"
+            columns: ["paket_id"]
+            isOneToOne: false
+            referencedRelation: "share_paket"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -799,6 +1387,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      can_access_paket: {
+        Args: { _paket_id: string; _user_id: string }
+        Returns: boolean
+      }
       count_permohonan_bulan_ini: { Args: never; Returns: number }
       get_user_desa: { Args: { _user_id: string }; Returns: string }
       get_user_opd: { Args: { _user_id: string }; Returns: string }
@@ -809,6 +1401,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_pimpinan: { Args: { _user_id: string }; Returns: boolean }
       opd_kinerja_agg: {
         Args: never
         Returns: {
@@ -864,7 +1457,9 @@ export type Database = {
       }
     }
     Enums: {
+      absensi_tipe: "masuk" | "pulang"
       app_role: "warga" | "admin_opd" | "super_admin" | "admin_desa" | "asn"
+      aset_status: "aktif" | "rusak" | "dihapuskan"
       job_status: "pending" | "running" | "success" | "failed" | "dead"
       status_permohonan: "baru" | "diproses" | "selesai" | "ditolak"
     }
@@ -994,7 +1589,9 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      absensi_tipe: ["masuk", "pulang"],
       app_role: ["warga", "admin_opd", "super_admin", "admin_desa", "asn"],
+      aset_status: ["aktif", "rusak", "dihapuskan"],
       job_status: ["pending", "running", "success", "failed", "dead"],
       status_permohonan: ["baru", "diproses", "selesai", "ditolak"],
     },
