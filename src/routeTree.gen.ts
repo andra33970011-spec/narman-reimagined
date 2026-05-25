@@ -9,38 +9,685 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TentangRouteImport } from './routes/tentang'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as KontakRouteImport } from './routes/kontak'
+import { Route as KinerjaOpdRouteImport } from './routes/kinerja-opd'
+import { Route as DataRouteImport } from './routes/data'
+import { Route as BeritaRouteImport } from './routes/berita'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AkunRouteImport } from './routes/akun'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PimpinanIndexRouteImport } from './routes/pimpinan.index'
+import { Route as PermohonanIndexRouteImport } from './routes/permohonan.index'
+import { Route as PengisianIndexRouteImport } from './routes/pengisian.index'
+import { Route as LayananIndexRouteImport } from './routes/layanan.index'
+import { Route as BerbagiIndexRouteImport } from './routes/berbagi.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as PermohonanBaruRouteImport } from './routes/permohonan.baru'
+import { Route as PermohonanIdRouteImport } from './routes/permohonan.$id'
+import { Route as PengisianIdRouteImport } from './routes/pengisian.$id'
+import { Route as LayananSlugRouteImport } from './routes/layanan.$slug'
+import { Route as InstansiSingkatanRouteImport } from './routes/instansi.$singkatan'
+import { Route as BerbagiBaruRouteImport } from './routes/berbagi.baru'
+import { Route as BerbagiIdRouteImport } from './routes/berbagi.$id'
+import { Route as AsnAsetRouteImport } from './routes/asn.aset'
+import { Route as AsnAbsensiRouteImport } from './routes/asn.absensi'
+import { Route as AdminVerifikasiLogRouteImport } from './routes/admin.verifikasi-log'
+import { Route as AdminVerifikasiRouteImport } from './routes/admin.verifikasi'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as AdminStorageRouteImport } from './routes/admin.storage'
+import { Route as AdminRatingRouteImport } from './routes/admin.rating'
+import { Route as AdminPejabatRouteImport } from './routes/admin.pejabat'
+import { Route as AdminOpdRouteImport } from './routes/admin.opd'
+import { Route as AdminLayananRouteImport } from './routes/admin.layanan'
+import { Route as AdminLaporanRouteImport } from './routes/admin.laporan'
+import { Route as AdminDesaRouteImport } from './routes/admin.desa'
+import { Route as AdminDatasetRouteImport } from './routes/admin.dataset'
+import { Route as AdminConfigRouteImport } from './routes/admin.config'
+import { Route as AdminCmsRouteImport } from './routes/admin.cms'
+import { Route as AdminBrandingRouteImport } from './routes/admin.branding'
+import { Route as AdminBerbagiRouteImport } from './routes/admin.berbagi'
+import { Route as AdminBackupRouteImport } from './routes/admin.backup'
+import { Route as AdminAuditRouteImport } from './routes/admin.audit'
+import { Route as AdminAsnRouteImport } from './routes/admin.asn'
+import { Route as AdminAsetRouteImport } from './routes/admin.aset'
+import { Route as AsnScanTokenRouteImport } from './routes/asn.scan.$token'
+import { Route as ApiPublicHooksStorageCleanupRouteImport } from './routes/api/public/hooks/storage-cleanup'
+import { Route as ApiPublicHooksBackupSnapshotRouteImport } from './routes/api/public/hooks/backup-snapshot'
 
+const TentangRoute = TentangRouteImport.update({
+  id: '/tentang',
+  path: '/tentang',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontakRoute = KontakRouteImport.update({
+  id: '/kontak',
+  path: '/kontak',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KinerjaOpdRoute = KinerjaOpdRouteImport.update({
+  id: '/kinerja-opd',
+  path: '/kinerja-opd',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataRoute = DataRouteImport.update({
+  id: '/data',
+  path: '/data',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BeritaRoute = BeritaRouteImport.update({
+  id: '/berita',
+  path: '/berita',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AkunRoute = AkunRouteImport.update({
+  id: '/akun',
+  path: '/akun',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PimpinanIndexRoute = PimpinanIndexRouteImport.update({
+  id: '/pimpinan/',
+  path: '/pimpinan/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PermohonanIndexRoute = PermohonanIndexRouteImport.update({
+  id: '/permohonan/',
+  path: '/permohonan/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PengisianIndexRoute = PengisianIndexRouteImport.update({
+  id: '/pengisian/',
+  path: '/pengisian/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LayananIndexRoute = LayananIndexRouteImport.update({
+  id: '/layanan/',
+  path: '/layanan/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BerbagiIndexRoute = BerbagiIndexRouteImport.update({
+  id: '/berbagi/',
+  path: '/berbagi/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PermohonanBaruRoute = PermohonanBaruRouteImport.update({
+  id: '/permohonan/baru',
+  path: '/permohonan/baru',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PermohonanIdRoute = PermohonanIdRouteImport.update({
+  id: '/permohonan/$id',
+  path: '/permohonan/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PengisianIdRoute = PengisianIdRouteImport.update({
+  id: '/pengisian/$id',
+  path: '/pengisian/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LayananSlugRoute = LayananSlugRouteImport.update({
+  id: '/layanan/$slug',
+  path: '/layanan/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InstansiSingkatanRoute = InstansiSingkatanRouteImport.update({
+  id: '/instansi/$singkatan',
+  path: '/instansi/$singkatan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BerbagiBaruRoute = BerbagiBaruRouteImport.update({
+  id: '/berbagi/baru',
+  path: '/berbagi/baru',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BerbagiIdRoute = BerbagiIdRouteImport.update({
+  id: '/berbagi/$id',
+  path: '/berbagi/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AsnAsetRoute = AsnAsetRouteImport.update({
+  id: '/asn/aset',
+  path: '/asn/aset',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AsnAbsensiRoute = AsnAbsensiRouteImport.update({
+  id: '/asn/absensi',
+  path: '/asn/absensi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminVerifikasiLogRoute = AdminVerifikasiLogRouteImport.update({
+  id: '/admin/verifikasi-log',
+  path: '/admin/verifikasi-log',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminVerifikasiRoute = AdminVerifikasiRouteImport.update({
+  id: '/admin/verifikasi',
+  path: '/admin/verifikasi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/admin/users',
+  path: '/admin/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminStorageRoute = AdminStorageRouteImport.update({
+  id: '/admin/storage',
+  path: '/admin/storage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRatingRoute = AdminRatingRouteImport.update({
+  id: '/admin/rating',
+  path: '/admin/rating',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminPejabatRoute = AdminPejabatRouteImport.update({
+  id: '/admin/pejabat',
+  path: '/admin/pejabat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminOpdRoute = AdminOpdRouteImport.update({
+  id: '/admin/opd',
+  path: '/admin/opd',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLayananRoute = AdminLayananRouteImport.update({
+  id: '/admin/layanan',
+  path: '/admin/layanan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLaporanRoute = AdminLaporanRouteImport.update({
+  id: '/admin/laporan',
+  path: '/admin/laporan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDesaRoute = AdminDesaRouteImport.update({
+  id: '/admin/desa',
+  path: '/admin/desa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDatasetRoute = AdminDatasetRouteImport.update({
+  id: '/admin/dataset',
+  path: '/admin/dataset',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminConfigRoute = AdminConfigRouteImport.update({
+  id: '/admin/config',
+  path: '/admin/config',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminCmsRoute = AdminCmsRouteImport.update({
+  id: '/admin/cms',
+  path: '/admin/cms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminBrandingRoute = AdminBrandingRouteImport.update({
+  id: '/admin/branding',
+  path: '/admin/branding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminBerbagiRoute = AdminBerbagiRouteImport.update({
+  id: '/admin/berbagi',
+  path: '/admin/berbagi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminBackupRoute = AdminBackupRouteImport.update({
+  id: '/admin/backup',
+  path: '/admin/backup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAuditRoute = AdminAuditRouteImport.update({
+  id: '/admin/audit',
+  path: '/admin/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAsnRoute = AdminAsnRouteImport.update({
+  id: '/admin/asn',
+  path: '/admin/asn',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAsetRoute = AdminAsetRouteImport.update({
+  id: '/admin/aset',
+  path: '/admin/aset',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AsnScanTokenRoute = AsnScanTokenRouteImport.update({
+  id: '/asn/scan/$token',
+  path: '/asn/scan/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicHooksStorageCleanupRoute =
+  ApiPublicHooksStorageCleanupRouteImport.update({
+    id: '/api/public/hooks/storage-cleanup',
+    path: '/api/public/hooks/storage-cleanup',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicHooksBackupSnapshotRoute =
+  ApiPublicHooksBackupSnapshotRouteImport.update({
+    id: '/api/public/hooks/backup-snapshot',
+    path: '/api/public/hooks/backup-snapshot',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/akun': typeof AkunRoute
+  '/auth': typeof AuthRoute
+  '/berita': typeof BeritaRoute
+  '/data': typeof DataRoute
+  '/kinerja-opd': typeof KinerjaOpdRoute
+  '/kontak': typeof KontakRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/tentang': typeof TentangRoute
+  '/admin/aset': typeof AdminAsetRoute
+  '/admin/asn': typeof AdminAsnRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/backup': typeof AdminBackupRoute
+  '/admin/berbagi': typeof AdminBerbagiRoute
+  '/admin/branding': typeof AdminBrandingRoute
+  '/admin/cms': typeof AdminCmsRoute
+  '/admin/config': typeof AdminConfigRoute
+  '/admin/dataset': typeof AdminDatasetRoute
+  '/admin/desa': typeof AdminDesaRoute
+  '/admin/laporan': typeof AdminLaporanRoute
+  '/admin/layanan': typeof AdminLayananRoute
+  '/admin/opd': typeof AdminOpdRoute
+  '/admin/pejabat': typeof AdminPejabatRoute
+  '/admin/rating': typeof AdminRatingRoute
+  '/admin/storage': typeof AdminStorageRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/verifikasi': typeof AdminVerifikasiRoute
+  '/admin/verifikasi-log': typeof AdminVerifikasiLogRoute
+  '/asn/absensi': typeof AsnAbsensiRoute
+  '/asn/aset': typeof AsnAsetRoute
+  '/berbagi/$id': typeof BerbagiIdRoute
+  '/berbagi/baru': typeof BerbagiBaruRoute
+  '/instansi/$singkatan': typeof InstansiSingkatanRoute
+  '/layanan/$slug': typeof LayananSlugRoute
+  '/pengisian/$id': typeof PengisianIdRoute
+  '/permohonan/$id': typeof PermohonanIdRoute
+  '/permohonan/baru': typeof PermohonanBaruRoute
+  '/admin/': typeof AdminIndexRoute
+  '/berbagi/': typeof BerbagiIndexRoute
+  '/layanan/': typeof LayananIndexRoute
+  '/pengisian/': typeof PengisianIndexRoute
+  '/permohonan/': typeof PermohonanIndexRoute
+  '/pimpinan/': typeof PimpinanIndexRoute
+  '/asn/scan/$token': typeof AsnScanTokenRoute
+  '/api/public/hooks/backup-snapshot': typeof ApiPublicHooksBackupSnapshotRoute
+  '/api/public/hooks/storage-cleanup': typeof ApiPublicHooksStorageCleanupRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/akun': typeof AkunRoute
+  '/auth': typeof AuthRoute
+  '/berita': typeof BeritaRoute
+  '/data': typeof DataRoute
+  '/kinerja-opd': typeof KinerjaOpdRoute
+  '/kontak': typeof KontakRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/tentang': typeof TentangRoute
+  '/admin/aset': typeof AdminAsetRoute
+  '/admin/asn': typeof AdminAsnRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/backup': typeof AdminBackupRoute
+  '/admin/berbagi': typeof AdminBerbagiRoute
+  '/admin/branding': typeof AdminBrandingRoute
+  '/admin/cms': typeof AdminCmsRoute
+  '/admin/config': typeof AdminConfigRoute
+  '/admin/dataset': typeof AdminDatasetRoute
+  '/admin/desa': typeof AdminDesaRoute
+  '/admin/laporan': typeof AdminLaporanRoute
+  '/admin/layanan': typeof AdminLayananRoute
+  '/admin/opd': typeof AdminOpdRoute
+  '/admin/pejabat': typeof AdminPejabatRoute
+  '/admin/rating': typeof AdminRatingRoute
+  '/admin/storage': typeof AdminStorageRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/verifikasi': typeof AdminVerifikasiRoute
+  '/admin/verifikasi-log': typeof AdminVerifikasiLogRoute
+  '/asn/absensi': typeof AsnAbsensiRoute
+  '/asn/aset': typeof AsnAsetRoute
+  '/berbagi/$id': typeof BerbagiIdRoute
+  '/berbagi/baru': typeof BerbagiBaruRoute
+  '/instansi/$singkatan': typeof InstansiSingkatanRoute
+  '/layanan/$slug': typeof LayananSlugRoute
+  '/pengisian/$id': typeof PengisianIdRoute
+  '/permohonan/$id': typeof PermohonanIdRoute
+  '/permohonan/baru': typeof PermohonanBaruRoute
+  '/admin': typeof AdminIndexRoute
+  '/berbagi': typeof BerbagiIndexRoute
+  '/layanan': typeof LayananIndexRoute
+  '/pengisian': typeof PengisianIndexRoute
+  '/permohonan': typeof PermohonanIndexRoute
+  '/pimpinan': typeof PimpinanIndexRoute
+  '/asn/scan/$token': typeof AsnScanTokenRoute
+  '/api/public/hooks/backup-snapshot': typeof ApiPublicHooksBackupSnapshotRoute
+  '/api/public/hooks/storage-cleanup': typeof ApiPublicHooksStorageCleanupRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/akun': typeof AkunRoute
+  '/auth': typeof AuthRoute
+  '/berita': typeof BeritaRoute
+  '/data': typeof DataRoute
+  '/kinerja-opd': typeof KinerjaOpdRoute
+  '/kontak': typeof KontakRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/tentang': typeof TentangRoute
+  '/admin/aset': typeof AdminAsetRoute
+  '/admin/asn': typeof AdminAsnRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/backup': typeof AdminBackupRoute
+  '/admin/berbagi': typeof AdminBerbagiRoute
+  '/admin/branding': typeof AdminBrandingRoute
+  '/admin/cms': typeof AdminCmsRoute
+  '/admin/config': typeof AdminConfigRoute
+  '/admin/dataset': typeof AdminDatasetRoute
+  '/admin/desa': typeof AdminDesaRoute
+  '/admin/laporan': typeof AdminLaporanRoute
+  '/admin/layanan': typeof AdminLayananRoute
+  '/admin/opd': typeof AdminOpdRoute
+  '/admin/pejabat': typeof AdminPejabatRoute
+  '/admin/rating': typeof AdminRatingRoute
+  '/admin/storage': typeof AdminStorageRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/admin/verifikasi': typeof AdminVerifikasiRoute
+  '/admin/verifikasi-log': typeof AdminVerifikasiLogRoute
+  '/asn/absensi': typeof AsnAbsensiRoute
+  '/asn/aset': typeof AsnAsetRoute
+  '/berbagi/$id': typeof BerbagiIdRoute
+  '/berbagi/baru': typeof BerbagiBaruRoute
+  '/instansi/$singkatan': typeof InstansiSingkatanRoute
+  '/layanan/$slug': typeof LayananSlugRoute
+  '/pengisian/$id': typeof PengisianIdRoute
+  '/permohonan/$id': typeof PermohonanIdRoute
+  '/permohonan/baru': typeof PermohonanBaruRoute
+  '/admin/': typeof AdminIndexRoute
+  '/berbagi/': typeof BerbagiIndexRoute
+  '/layanan/': typeof LayananIndexRoute
+  '/pengisian/': typeof PengisianIndexRoute
+  '/permohonan/': typeof PermohonanIndexRoute
+  '/pimpinan/': typeof PimpinanIndexRoute
+  '/asn/scan/$token': typeof AsnScanTokenRoute
+  '/api/public/hooks/backup-snapshot': typeof ApiPublicHooksBackupSnapshotRoute
+  '/api/public/hooks/storage-cleanup': typeof ApiPublicHooksStorageCleanupRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/akun'
+    | '/auth'
+    | '/berita'
+    | '/data'
+    | '/kinerja-opd'
+    | '/kontak'
+    | '/reset-password'
+    | '/tentang'
+    | '/admin/aset'
+    | '/admin/asn'
+    | '/admin/audit'
+    | '/admin/backup'
+    | '/admin/berbagi'
+    | '/admin/branding'
+    | '/admin/cms'
+    | '/admin/config'
+    | '/admin/dataset'
+    | '/admin/desa'
+    | '/admin/laporan'
+    | '/admin/layanan'
+    | '/admin/opd'
+    | '/admin/pejabat'
+    | '/admin/rating'
+    | '/admin/storage'
+    | '/admin/users'
+    | '/admin/verifikasi'
+    | '/admin/verifikasi-log'
+    | '/asn/absensi'
+    | '/asn/aset'
+    | '/berbagi/$id'
+    | '/berbagi/baru'
+    | '/instansi/$singkatan'
+    | '/layanan/$slug'
+    | '/pengisian/$id'
+    | '/permohonan/$id'
+    | '/permohonan/baru'
+    | '/admin/'
+    | '/berbagi/'
+    | '/layanan/'
+    | '/pengisian/'
+    | '/permohonan/'
+    | '/pimpinan/'
+    | '/asn/scan/$token'
+    | '/api/public/hooks/backup-snapshot'
+    | '/api/public/hooks/storage-cleanup'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/akun'
+    | '/auth'
+    | '/berita'
+    | '/data'
+    | '/kinerja-opd'
+    | '/kontak'
+    | '/reset-password'
+    | '/tentang'
+    | '/admin/aset'
+    | '/admin/asn'
+    | '/admin/audit'
+    | '/admin/backup'
+    | '/admin/berbagi'
+    | '/admin/branding'
+    | '/admin/cms'
+    | '/admin/config'
+    | '/admin/dataset'
+    | '/admin/desa'
+    | '/admin/laporan'
+    | '/admin/layanan'
+    | '/admin/opd'
+    | '/admin/pejabat'
+    | '/admin/rating'
+    | '/admin/storage'
+    | '/admin/users'
+    | '/admin/verifikasi'
+    | '/admin/verifikasi-log'
+    | '/asn/absensi'
+    | '/asn/aset'
+    | '/berbagi/$id'
+    | '/berbagi/baru'
+    | '/instansi/$singkatan'
+    | '/layanan/$slug'
+    | '/pengisian/$id'
+    | '/permohonan/$id'
+    | '/permohonan/baru'
+    | '/admin'
+    | '/berbagi'
+    | '/layanan'
+    | '/pengisian'
+    | '/permohonan'
+    | '/pimpinan'
+    | '/asn/scan/$token'
+    | '/api/public/hooks/backup-snapshot'
+    | '/api/public/hooks/storage-cleanup'
+  id:
+    | '__root__'
+    | '/'
+    | '/akun'
+    | '/auth'
+    | '/berita'
+    | '/data'
+    | '/kinerja-opd'
+    | '/kontak'
+    | '/reset-password'
+    | '/tentang'
+    | '/admin/aset'
+    | '/admin/asn'
+    | '/admin/audit'
+    | '/admin/backup'
+    | '/admin/berbagi'
+    | '/admin/branding'
+    | '/admin/cms'
+    | '/admin/config'
+    | '/admin/dataset'
+    | '/admin/desa'
+    | '/admin/laporan'
+    | '/admin/layanan'
+    | '/admin/opd'
+    | '/admin/pejabat'
+    | '/admin/rating'
+    | '/admin/storage'
+    | '/admin/users'
+    | '/admin/verifikasi'
+    | '/admin/verifikasi-log'
+    | '/asn/absensi'
+    | '/asn/aset'
+    | '/berbagi/$id'
+    | '/berbagi/baru'
+    | '/instansi/$singkatan'
+    | '/layanan/$slug'
+    | '/pengisian/$id'
+    | '/permohonan/$id'
+    | '/permohonan/baru'
+    | '/admin/'
+    | '/berbagi/'
+    | '/layanan/'
+    | '/pengisian/'
+    | '/permohonan/'
+    | '/pimpinan/'
+    | '/asn/scan/$token'
+    | '/api/public/hooks/backup-snapshot'
+    | '/api/public/hooks/storage-cleanup'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AkunRoute: typeof AkunRoute
+  AuthRoute: typeof AuthRoute
+  BeritaRoute: typeof BeritaRoute
+  DataRoute: typeof DataRoute
+  KinerjaOpdRoute: typeof KinerjaOpdRoute
+  KontakRoute: typeof KontakRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  TentangRoute: typeof TentangRoute
+  AdminAsetRoute: typeof AdminAsetRoute
+  AdminAsnRoute: typeof AdminAsnRoute
+  AdminAuditRoute: typeof AdminAuditRoute
+  AdminBackupRoute: typeof AdminBackupRoute
+  AdminBerbagiRoute: typeof AdminBerbagiRoute
+  AdminBrandingRoute: typeof AdminBrandingRoute
+  AdminCmsRoute: typeof AdminCmsRoute
+  AdminConfigRoute: typeof AdminConfigRoute
+  AdminDatasetRoute: typeof AdminDatasetRoute
+  AdminDesaRoute: typeof AdminDesaRoute
+  AdminLaporanRoute: typeof AdminLaporanRoute
+  AdminLayananRoute: typeof AdminLayananRoute
+  AdminOpdRoute: typeof AdminOpdRoute
+  AdminPejabatRoute: typeof AdminPejabatRoute
+  AdminRatingRoute: typeof AdminRatingRoute
+  AdminStorageRoute: typeof AdminStorageRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminVerifikasiRoute: typeof AdminVerifikasiRoute
+  AdminVerifikasiLogRoute: typeof AdminVerifikasiLogRoute
+  AsnAbsensiRoute: typeof AsnAbsensiRoute
+  AsnAsetRoute: typeof AsnAsetRoute
+  BerbagiIdRoute: typeof BerbagiIdRoute
+  BerbagiBaruRoute: typeof BerbagiBaruRoute
+  InstansiSingkatanRoute: typeof InstansiSingkatanRoute
+  LayananSlugRoute: typeof LayananSlugRoute
+  PengisianIdRoute: typeof PengisianIdRoute
+  PermohonanIdRoute: typeof PermohonanIdRoute
+  PermohonanBaruRoute: typeof PermohonanBaruRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  BerbagiIndexRoute: typeof BerbagiIndexRoute
+  LayananIndexRoute: typeof LayananIndexRoute
+  PengisianIndexRoute: typeof PengisianIndexRoute
+  PermohonanIndexRoute: typeof PermohonanIndexRoute
+  PimpinanIndexRoute: typeof PimpinanIndexRoute
+  AsnScanTokenRoute: typeof AsnScanTokenRoute
+  ApiPublicHooksBackupSnapshotRoute: typeof ApiPublicHooksBackupSnapshotRoute
+  ApiPublicHooksStorageCleanupRoute: typeof ApiPublicHooksStorageCleanupRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tentang': {
+      id: '/tentang'
+      path: '/tentang'
+      fullPath: '/tentang'
+      preLoaderRoute: typeof TentangRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontak': {
+      id: '/kontak'
+      path: '/kontak'
+      fullPath: '/kontak'
+      preLoaderRoute: typeof KontakRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kinerja-opd': {
+      id: '/kinerja-opd'
+      path: '/kinerja-opd'
+      fullPath: '/kinerja-opd'
+      preLoaderRoute: typeof KinerjaOpdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data': {
+      id: '/data'
+      path: '/data'
+      fullPath: '/data'
+      preLoaderRoute: typeof DataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/berita': {
+      id: '/berita'
+      path: '/berita'
+      fullPath: '/berita'
+      preLoaderRoute: typeof BeritaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/akun': {
+      id: '/akun'
+      path: '/akun'
+      fullPath: '/akun'
+      preLoaderRoute: typeof AkunRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +695,316 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pimpinan/': {
+      id: '/pimpinan/'
+      path: '/pimpinan'
+      fullPath: '/pimpinan/'
+      preLoaderRoute: typeof PimpinanIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/permohonan/': {
+      id: '/permohonan/'
+      path: '/permohonan'
+      fullPath: '/permohonan/'
+      preLoaderRoute: typeof PermohonanIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pengisian/': {
+      id: '/pengisian/'
+      path: '/pengisian'
+      fullPath: '/pengisian/'
+      preLoaderRoute: typeof PengisianIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/layanan/': {
+      id: '/layanan/'
+      path: '/layanan'
+      fullPath: '/layanan/'
+      preLoaderRoute: typeof LayananIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/berbagi/': {
+      id: '/berbagi/'
+      path: '/berbagi'
+      fullPath: '/berbagi/'
+      preLoaderRoute: typeof BerbagiIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/permohonan/baru': {
+      id: '/permohonan/baru'
+      path: '/permohonan/baru'
+      fullPath: '/permohonan/baru'
+      preLoaderRoute: typeof PermohonanBaruRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/permohonan/$id': {
+      id: '/permohonan/$id'
+      path: '/permohonan/$id'
+      fullPath: '/permohonan/$id'
+      preLoaderRoute: typeof PermohonanIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pengisian/$id': {
+      id: '/pengisian/$id'
+      path: '/pengisian/$id'
+      fullPath: '/pengisian/$id'
+      preLoaderRoute: typeof PengisianIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/layanan/$slug': {
+      id: '/layanan/$slug'
+      path: '/layanan/$slug'
+      fullPath: '/layanan/$slug'
+      preLoaderRoute: typeof LayananSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/instansi/$singkatan': {
+      id: '/instansi/$singkatan'
+      path: '/instansi/$singkatan'
+      fullPath: '/instansi/$singkatan'
+      preLoaderRoute: typeof InstansiSingkatanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/berbagi/baru': {
+      id: '/berbagi/baru'
+      path: '/berbagi/baru'
+      fullPath: '/berbagi/baru'
+      preLoaderRoute: typeof BerbagiBaruRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/berbagi/$id': {
+      id: '/berbagi/$id'
+      path: '/berbagi/$id'
+      fullPath: '/berbagi/$id'
+      preLoaderRoute: typeof BerbagiIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/asn/aset': {
+      id: '/asn/aset'
+      path: '/asn/aset'
+      fullPath: '/asn/aset'
+      preLoaderRoute: typeof AsnAsetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/asn/absensi': {
+      id: '/asn/absensi'
+      path: '/asn/absensi'
+      fullPath: '/asn/absensi'
+      preLoaderRoute: typeof AsnAbsensiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/verifikasi-log': {
+      id: '/admin/verifikasi-log'
+      path: '/admin/verifikasi-log'
+      fullPath: '/admin/verifikasi-log'
+      preLoaderRoute: typeof AdminVerifikasiLogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/verifikasi': {
+      id: '/admin/verifikasi'
+      path: '/admin/verifikasi'
+      fullPath: '/admin/verifikasi'
+      preLoaderRoute: typeof AdminVerifikasiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/admin/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/storage': {
+      id: '/admin/storage'
+      path: '/admin/storage'
+      fullPath: '/admin/storage'
+      preLoaderRoute: typeof AdminStorageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/rating': {
+      id: '/admin/rating'
+      path: '/admin/rating'
+      fullPath: '/admin/rating'
+      preLoaderRoute: typeof AdminRatingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/pejabat': {
+      id: '/admin/pejabat'
+      path: '/admin/pejabat'
+      fullPath: '/admin/pejabat'
+      preLoaderRoute: typeof AdminPejabatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/opd': {
+      id: '/admin/opd'
+      path: '/admin/opd'
+      fullPath: '/admin/opd'
+      preLoaderRoute: typeof AdminOpdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/layanan': {
+      id: '/admin/layanan'
+      path: '/admin/layanan'
+      fullPath: '/admin/layanan'
+      preLoaderRoute: typeof AdminLayananRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/laporan': {
+      id: '/admin/laporan'
+      path: '/admin/laporan'
+      fullPath: '/admin/laporan'
+      preLoaderRoute: typeof AdminLaporanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/desa': {
+      id: '/admin/desa'
+      path: '/admin/desa'
+      fullPath: '/admin/desa'
+      preLoaderRoute: typeof AdminDesaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/dataset': {
+      id: '/admin/dataset'
+      path: '/admin/dataset'
+      fullPath: '/admin/dataset'
+      preLoaderRoute: typeof AdminDatasetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/config': {
+      id: '/admin/config'
+      path: '/admin/config'
+      fullPath: '/admin/config'
+      preLoaderRoute: typeof AdminConfigRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/cms': {
+      id: '/admin/cms'
+      path: '/admin/cms'
+      fullPath: '/admin/cms'
+      preLoaderRoute: typeof AdminCmsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/branding': {
+      id: '/admin/branding'
+      path: '/admin/branding'
+      fullPath: '/admin/branding'
+      preLoaderRoute: typeof AdminBrandingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/berbagi': {
+      id: '/admin/berbagi'
+      path: '/admin/berbagi'
+      fullPath: '/admin/berbagi'
+      preLoaderRoute: typeof AdminBerbagiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/backup': {
+      id: '/admin/backup'
+      path: '/admin/backup'
+      fullPath: '/admin/backup'
+      preLoaderRoute: typeof AdminBackupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/audit': {
+      id: '/admin/audit'
+      path: '/admin/audit'
+      fullPath: '/admin/audit'
+      preLoaderRoute: typeof AdminAuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/asn': {
+      id: '/admin/asn'
+      path: '/admin/asn'
+      fullPath: '/admin/asn'
+      preLoaderRoute: typeof AdminAsnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/aset': {
+      id: '/admin/aset'
+      path: '/admin/aset'
+      fullPath: '/admin/aset'
+      preLoaderRoute: typeof AdminAsetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/asn/scan/$token': {
+      id: '/asn/scan/$token'
+      path: '/asn/scan/$token'
+      fullPath: '/asn/scan/$token'
+      preLoaderRoute: typeof AsnScanTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/storage-cleanup': {
+      id: '/api/public/hooks/storage-cleanup'
+      path: '/api/public/hooks/storage-cleanup'
+      fullPath: '/api/public/hooks/storage-cleanup'
+      preLoaderRoute: typeof ApiPublicHooksStorageCleanupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/hooks/backup-snapshot': {
+      id: '/api/public/hooks/backup-snapshot'
+      path: '/api/public/hooks/backup-snapshot'
+      fullPath: '/api/public/hooks/backup-snapshot'
+      preLoaderRoute: typeof ApiPublicHooksBackupSnapshotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AkunRoute: AkunRoute,
+  AuthRoute: AuthRoute,
+  BeritaRoute: BeritaRoute,
+  DataRoute: DataRoute,
+  KinerjaOpdRoute: KinerjaOpdRoute,
+  KontakRoute: KontakRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  TentangRoute: TentangRoute,
+  AdminAsetRoute: AdminAsetRoute,
+  AdminAsnRoute: AdminAsnRoute,
+  AdminAuditRoute: AdminAuditRoute,
+  AdminBackupRoute: AdminBackupRoute,
+  AdminBerbagiRoute: AdminBerbagiRoute,
+  AdminBrandingRoute: AdminBrandingRoute,
+  AdminCmsRoute: AdminCmsRoute,
+  AdminConfigRoute: AdminConfigRoute,
+  AdminDatasetRoute: AdminDatasetRoute,
+  AdminDesaRoute: AdminDesaRoute,
+  AdminLaporanRoute: AdminLaporanRoute,
+  AdminLayananRoute: AdminLayananRoute,
+  AdminOpdRoute: AdminOpdRoute,
+  AdminPejabatRoute: AdminPejabatRoute,
+  AdminRatingRoute: AdminRatingRoute,
+  AdminStorageRoute: AdminStorageRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminVerifikasiRoute: AdminVerifikasiRoute,
+  AdminVerifikasiLogRoute: AdminVerifikasiLogRoute,
+  AsnAbsensiRoute: AsnAbsensiRoute,
+  AsnAsetRoute: AsnAsetRoute,
+  BerbagiIdRoute: BerbagiIdRoute,
+  BerbagiBaruRoute: BerbagiBaruRoute,
+  InstansiSingkatanRoute: InstansiSingkatanRoute,
+  LayananSlugRoute: LayananSlugRoute,
+  PengisianIdRoute: PengisianIdRoute,
+  PermohonanIdRoute: PermohonanIdRoute,
+  PermohonanBaruRoute: PermohonanBaruRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  BerbagiIndexRoute: BerbagiIndexRoute,
+  LayananIndexRoute: LayananIndexRoute,
+  PengisianIndexRoute: PengisianIndexRoute,
+  PermohonanIndexRoute: PermohonanIndexRoute,
+  PimpinanIndexRoute: PimpinanIndexRoute,
+  AsnScanTokenRoute: AsnScanTokenRoute,
+  ApiPublicHooksBackupSnapshotRoute: ApiPublicHooksBackupSnapshotRoute,
+  ApiPublicHooksStorageCleanupRoute: ApiPublicHooksStorageCleanupRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
