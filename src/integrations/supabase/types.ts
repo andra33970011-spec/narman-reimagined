@@ -1149,29 +1149,41 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          mime: string | null
           mime_type: string | null
           nama_file: string
           paket_id: string
+          path: string | null
           size_bytes: number | null
-          url: string
+          ukuran: number | null
+          uploaded_by: string | null
+          url: string | null
         }
         Insert: {
           created_at?: string
           id?: string
+          mime?: string | null
           mime_type?: string | null
           nama_file: string
           paket_id: string
+          path?: string | null
           size_bytes?: number | null
-          url: string
+          ukuran?: number | null
+          uploaded_by?: string | null
+          url?: string | null
         }
         Update: {
           created_at?: string
           id?: string
+          mime?: string | null
           mime_type?: string | null
           nama_file?: string
           paket_id?: string
+          path?: string | null
           size_bytes?: number | null
-          url?: string
+          ukuran?: number | null
+          uploaded_by?: string | null
+          url?: string | null
         }
         Relationships: [
           {
@@ -1289,6 +1301,7 @@ export type Database = {
           created_at: string
           dibuka_at: string | null
           dibuka_oleh: string | null
+          dibuka_pada: string | null
           id: string
           paket_id: string
           status_baca: string
@@ -1296,11 +1309,14 @@ export type Database = {
           target_pejabat_id: string | null
           target_type: string
           target_user_id: string | null
+          tindak_lanjut_catatan: string | null
+          tindak_lanjut_pada: string | null
         }
         Insert: {
           created_at?: string
           dibuka_at?: string | null
           dibuka_oleh?: string | null
+          dibuka_pada?: string | null
           id?: string
           paket_id: string
           status_baca?: string
@@ -1308,11 +1324,14 @@ export type Database = {
           target_pejabat_id?: string | null
           target_type: string
           target_user_id?: string | null
+          tindak_lanjut_catatan?: string | null
+          tindak_lanjut_pada?: string | null
         }
         Update: {
           created_at?: string
           dibuka_at?: string | null
           dibuka_oleh?: string | null
+          dibuka_pada?: string | null
           id?: string
           paket_id?: string
           status_baca?: string
@@ -1320,6 +1339,8 @@ export type Database = {
           target_pejabat_id?: string | null
           target_type?: string
           target_user_id?: string | null
+          tindak_lanjut_catatan?: string | null
+          tindak_lanjut_pada?: string | null
         }
         Relationships: [
           {
