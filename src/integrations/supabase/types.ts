@@ -864,7 +864,7 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "warga" | "admin_opd" | "super_admin" | "admin_desa"
+      app_role: "warga" | "admin_opd" | "super_admin" | "admin_desa" | "asn"
       job_status: "pending" | "running" | "success" | "failed" | "dead"
       status_permohonan: "baru" | "diproses" | "selesai" | "ditolak"
     }
@@ -994,7 +994,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["warga", "admin_opd", "super_admin", "admin_desa"],
+      app_role: ["warga", "admin_opd", "super_admin", "admin_desa", "asn"],
       job_status: ["pending", "running", "success", "failed", "dead"],
       status_permohonan: ["baru", "diproses", "selesai", "ditolak"],
     },
