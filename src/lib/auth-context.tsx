@@ -2,7 +2,13 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import type { Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 
-export type AppRole = "warga" | "admin_opd" | "super_admin" | "admin_desa" | "asn";
+// AppRole mencakup role baru `admin_pemda` (Fase 1 RBAC). Role lama tetap.
+export type AppRole = "warga" | "admin_opd" | "super_admin" | "admin_desa" | "asn" | "admin_pemda";
+
+export type AsnTypeValue = "pns" | "pppk_penuh_waktu" | "pppk_paruh_waktu" | "honorer";
+export type SystemPositionValue =
+  | "kepala_opd" | "sekretaris" | "kepala_bidang" | "kepala_sekolah"
+  | "operator" | "verifikator" | "staff" | "guru" | "tenaga_teknis" | "lainnya";
 
 export type AuthProfile = {
   nama_lengkap: string | null;
@@ -23,12 +29,19 @@ type AuthCtx = {
   isSuperAdmin: boolean;
   isAdminDesa: boolean;
   isAdminOpd: boolean;
+  isAdminPemda: boolean;
   isAsn: boolean;
   isStaff: boolean;
   isVerified: boolean;
+  // Fase 2 RBAC — granular permission & klasifikasi ASN
+  permissions: Set<string>;
+  asnType: AsnTypeValue | null;
+  systemPosition: SystemPositionValue | null;
+  can: (permission: string) => boolean;
   signOut: () => Promise<void>;
   refreshRoles: () => Promise<void>;
   refreshProfile: () => Promise<void>;
+  refreshPermissions: () => Promise<void>;
 };
 
 const Ctx = createContext<AuthCtx | undefined>(undefined);
@@ -38,6 +51,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [roles, setRoles] = useState<AppRole[]>([]);
   const [profile, setProfile] = useState<AuthProfile | null>(null);
+  const [permissions, setPermissions] = useState<Set<string>>(new Set());
+  const [asnType, setAsnType] = useState<AsnTypeValue | null>(null);
+  const [systemPosition, setSystemPosition] = useState<SystemPositionValue | null>(null);
   const [loading, setLoading] = useState(true);
 
   async function loadRoles(uid: string) {
@@ -47,10 +63,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   async function loadProfile(uid: string) {
     const { data } = await supabase
       .from("profiles")
-      .select("nama_lengkap,nik,no_hp,desa,verified_at,verified_by")
+      .select("nama_lengkap,nik,no_hp,desa,verified_at,verified_by,asn_type,system_position")
       .eq("id", uid)
       .maybeSingle();
-    setProfile((data as AuthProfile | null) ?? null);
+    const row = data as (AuthProfile & { asn_type?: AsnTypeValue | null; system_position?: SystemPositionValue | null }) | null;
+    setProfile(row ? {
+      nama_lengkap: row.nama_lengkap,
+      nik: row.nik,
+      no_hp: row.no_hp,
+      desa: row.desa,
+      verified_at: row.verified_at,
+      verified_by: row.verified_by,
+    } : null);
+    setAsnType(row?.asn_type ?? null);
+    setSystemPosition(row?.system_position ?? null);
+  }
+  async function loadPermissions(uid: string) {
+    const { data, error } = await supabase.rpc("get_effective_permissions", { _user_id: uid });
+    if (error) {
+      setPermissions(new Set());
+      return;
+    }
+    const codes = (data ?? [])
+      .map((r: { permission_code: string }) => r.permission_code)
+      .filter(Boolean);
+    setPermissions(new Set(codes));
   }
   // Catatan: auto-signOut pada login dihapus untuk mencegah user ter-logout
   // otomatis akibat race condition (roles/profile belum termuat) atau perubahan
@@ -71,11 +108,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(sess?.user ?? null);
       if (sess?.user) {
         setTimeout(async () => {
-          await Promise.all([loadRoles(sess.user.id), loadProfile(sess.user.id)]);
+          await Promise.all([loadRoles(sess.user.id), loadProfile(sess.user.id), loadPermissions(sess.user.id)]);
         }, 0);
       } else {
         setRoles([]);
         setProfile(null);
+        setPermissions(new Set());
+        setAsnType(null);
+        setSystemPosition(null);
       }
       if (event === "INITIAL_SESSION" || event === "SIGNED_IN" || event === "SIGNED_OUT" || event === "TOKEN_REFRESHED") {
         markSettled();
@@ -86,8 +126,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setSession((prev) => prev ?? sess);
       setUser((prev) => prev ?? sess?.user ?? null);
       if (sess?.user) {
-        // Jangan jalankan enforceBlockLogin di sini — sudah ditangani saat SIGNED_IN.
-        Promise.all([loadRoles(sess.user.id), loadProfile(sess.user.id)])
+        Promise.all([loadRoles(sess.user.id), loadProfile(sess.user.id), loadPermissions(sess.user.id)])
           .finally(markSettled);
       } else markSettled();
     });
@@ -160,21 +199,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     roles,
     profile,
     loading,
-    isAdmin: roles.includes("admin_opd") || roles.includes("super_admin") || roles.includes("admin_desa"),
+    isAdmin: roles.includes("admin_opd") || roles.includes("super_admin") || roles.includes("admin_desa") || roles.includes("admin_pemda"),
     isSuperAdmin: roles.includes("super_admin"),
     isAdminDesa: roles.includes("admin_desa"),
     isAdminOpd: roles.includes("admin_opd"),
+    isAdminPemda: roles.includes("admin_pemda"),
     isAsn: roles.includes("asn"),
     isStaff:
       roles.includes("super_admin") ||
+      roles.includes("admin_pemda") ||
       roles.includes("admin_opd") ||
       roles.includes("admin_desa") ||
       roles.includes("asn"),
     isVerified:
       !!profile?.verified_at ||
       roles.includes("super_admin") ||
+      roles.includes("admin_pemda") ||
       roles.includes("admin_opd") ||
       roles.includes("admin_desa"),
+    permissions,
+    asnType,
+    systemPosition,
+    can: (p: string) => roles.includes("super_admin") || permissions.has(p),
     signOut: async () => {
       await supabase.auth.signOut();
     },
@@ -183,6 +229,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     },
     refreshProfile: async () => {
       if (user) await loadProfile(user.id);
+    },
+    refreshPermissions: async () => {
+      if (user) await loadPermissions(user.id);
     },
   };
 

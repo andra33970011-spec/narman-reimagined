@@ -850,6 +850,30 @@ export type Database = {
         }
         Relationships: []
       }
+      permissions: {
+        Row: {
+          code: string
+          created_at: string
+          description: string | null
+          kategori: string
+          label: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          description?: string | null
+          kategori?: string
+          label: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          description?: string | null
+          kategori?: string
+          label?: string
+        }
+        Relationships: []
+      }
       permohonan: {
         Row: {
           atas_nama_hp: string | null
@@ -999,6 +1023,7 @@ export type Database = {
       }
       profiles: {
         Row: {
+          asn_type: Database["public"]["Enums"]["asn_type"] | null
           created_at: string
           desa: string | null
           id: string
@@ -1009,12 +1034,15 @@ export type Database = {
           no_hp: string | null
           opd_id: string | null
           status: string
+          system_position: Database["public"]["Enums"]["system_position"] | null
+          unit_kerja_id: string | null
           updated_at: string
           username: string | null
           verified_at: string | null
           verified_by: string | null
         }
         Insert: {
+          asn_type?: Database["public"]["Enums"]["asn_type"] | null
           created_at?: string
           desa?: string | null
           id: string
@@ -1025,12 +1053,17 @@ export type Database = {
           no_hp?: string | null
           opd_id?: string | null
           status?: string
+          system_position?:
+            | Database["public"]["Enums"]["system_position"]
+            | null
+          unit_kerja_id?: string | null
           updated_at?: string
           username?: string | null
           verified_at?: string | null
           verified_by?: string | null
         }
         Update: {
+          asn_type?: Database["public"]["Enums"]["asn_type"] | null
           created_at?: string
           desa?: string | null
           id?: string
@@ -1041,6 +1074,10 @@ export type Database = {
           no_hp?: string | null
           opd_id?: string | null
           status?: string
+          system_position?:
+            | Database["public"]["Enums"]["system_position"]
+            | null
+          unit_kerja_id?: string | null
           updated_at?: string
           username?: string | null
           verified_at?: string | null
@@ -1052,6 +1089,13 @@ export type Database = {
             columns: ["opd_id"]
             isOneToOne: false
             referencedRelation: "opd"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "profiles_unit_kerja_id_fkey"
+            columns: ["unit_kerja_id"]
+            isOneToOne: false
+            referencedRelation: "unit_kerja"
             referencedColumns: ["id"]
           },
         ]
@@ -1112,6 +1156,68 @@ export type Database = {
           window_start?: string
         }
         Relationships: []
+      }
+      rbac_audit: {
+        Row: {
+          aksi: string
+          created_at: string
+          data_sebelum: Json | null
+          data_sesudah: Json | null
+          entitas: string
+          id: string
+          target_user_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          aksi: string
+          created_at?: string
+          data_sebelum?: Json | null
+          data_sesudah?: Json | null
+          entitas: string
+          id?: string
+          target_user_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          aksi?: string
+          created_at?: string
+          data_sebelum?: Json | null
+          data_sesudah?: Json | null
+          entitas?: string
+          id?: string
+          target_user_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      role_permissions: {
+        Row: {
+          created_at: string
+          id: string
+          permission_code: string
+          role: Database["public"]["Enums"]["app_role"]
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          permission_code: string
+          role: Database["public"]["Enums"]["app_role"]
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          permission_code?: string
+          role?: Database["public"]["Enums"]["app_role"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "role_permissions_permission_code_fkey"
+            columns: ["permission_code"]
+            isOneToOne: false
+            referencedRelation: "permissions"
+            referencedColumns: ["code"]
+          },
+        ]
       }
       share_komentar: {
         Row: {
@@ -1352,6 +1458,88 @@ export type Database = {
           },
         ]
       }
+      unit_kerja: {
+        Row: {
+          aktif: boolean
+          created_at: string
+          id: string
+          kode: string | null
+          nama: string
+          opd_id: string
+          parent_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          aktif?: boolean
+          created_at?: string
+          id?: string
+          kode?: string | null
+          nama: string
+          opd_id: string
+          parent_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          aktif?: boolean
+          created_at?: string
+          id?: string
+          kode?: string | null
+          nama?: string
+          opd_id?: string
+          parent_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "unit_kerja_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "unit_kerja"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_permissions: {
+        Row: {
+          created_at: string
+          expires_at: string | null
+          granted: boolean
+          granted_by: string | null
+          id: string
+          permission_code: string
+          reason: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string | null
+          granted?: boolean
+          granted_by?: string | null
+          id?: string
+          permission_code: string
+          reason?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string | null
+          granted?: boolean
+          granted_by?: string | null
+          id?: string
+          permission_code?: string
+          reason?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_permissions_permission_code_fkey"
+            columns: ["permission_code"]
+            isOneToOne: false
+            referencedRelation: "permissions"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -1413,8 +1601,26 @@ export type Database = {
         Returns: boolean
       }
       count_permohonan_bulan_ini: { Args: never; Returns: number }
+      get_effective_permissions: {
+        Args: { _user_id: string }
+        Returns: {
+          permission_code: string
+        }[]
+      }
+      get_user_asn_type: {
+        Args: { _user_id: string }
+        Returns: Database["public"]["Enums"]["asn_type"]
+      }
       get_user_desa: { Args: { _user_id: string }; Returns: string }
       get_user_opd: { Args: { _user_id: string }; Returns: string }
+      get_user_position: {
+        Args: { _user_id: string }
+        Returns: Database["public"]["Enums"]["system_position"]
+      }
+      has_permission: {
+        Args: { _code: string; _user_id: string }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -1479,10 +1685,28 @@ export type Database = {
     }
     Enums: {
       absensi_tipe: "masuk" | "pulang"
-      app_role: "warga" | "admin_opd" | "super_admin" | "admin_desa" | "asn"
+      app_role:
+        | "warga"
+        | "admin_opd"
+        | "super_admin"
+        | "admin_desa"
+        | "asn"
+        | "admin_pemda"
       aset_status: "aktif" | "rusak" | "dihapuskan"
+      asn_type: "pns" | "pppk_penuh_waktu" | "pppk_paruh_waktu" | "honorer"
       job_status: "pending" | "running" | "success" | "failed" | "dead"
       status_permohonan: "baru" | "diproses" | "selesai" | "ditolak"
+      system_position:
+        | "kepala_opd"
+        | "sekretaris"
+        | "kepala_bidang"
+        | "kepala_sekolah"
+        | "operator"
+        | "verifikator"
+        | "staff"
+        | "guru"
+        | "tenaga_teknis"
+        | "lainnya"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1611,10 +1835,30 @@ export const Constants = {
   public: {
     Enums: {
       absensi_tipe: ["masuk", "pulang"],
-      app_role: ["warga", "admin_opd", "super_admin", "admin_desa", "asn"],
+      app_role: [
+        "warga",
+        "admin_opd",
+        "super_admin",
+        "admin_desa",
+        "asn",
+        "admin_pemda",
+      ],
       aset_status: ["aktif", "rusak", "dihapuskan"],
+      asn_type: ["pns", "pppk_penuh_waktu", "pppk_paruh_waktu", "honorer"],
       job_status: ["pending", "running", "success", "failed", "dead"],
       status_permohonan: ["baru", "diproses", "selesai", "ditolak"],
+      system_position: [
+        "kepala_opd",
+        "sekretaris",
+        "kepala_bidang",
+        "kepala_sekolah",
+        "operator",
+        "verifikator",
+        "staff",
+        "guru",
+        "tenaga_teknis",
+        "lainnya",
+      ],
     },
   },
 } as const
