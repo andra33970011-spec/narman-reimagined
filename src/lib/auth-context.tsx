@@ -108,11 +108,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(sess?.user ?? null);
       if (sess?.user) {
         setTimeout(async () => {
-          await Promise.all([loadRoles(sess.user.id), loadProfile(sess.user.id)]);
+          await Promise.all([loadRoles(sess.user.id), loadProfile(sess.user.id), loadPermissions(sess.user.id)]);
         }, 0);
       } else {
         setRoles([]);
         setProfile(null);
+        setPermissions(new Set());
+        setAsnType(null);
+        setSystemPosition(null);
       }
       if (event === "INITIAL_SESSION" || event === "SIGNED_IN" || event === "SIGNED_OUT" || event === "TOKEN_REFRESHED") {
         markSettled();
@@ -123,8 +126,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setSession((prev) => prev ?? sess);
       setUser((prev) => prev ?? sess?.user ?? null);
       if (sess?.user) {
-        // Jangan jalankan enforceBlockLogin di sini — sudah ditangani saat SIGNED_IN.
-        Promise.all([loadRoles(sess.user.id), loadProfile(sess.user.id)])
+        Promise.all([loadRoles(sess.user.id), loadProfile(sess.user.id), loadPermissions(sess.user.id)])
           .finally(markSettled);
       } else markSettled();
     });
