@@ -196,7 +196,7 @@ function PageBaru() {
                     <ul className="absolute left-0 right-0 z-10 mt-1 max-h-64 overflow-auto rounded-md border border-border bg-popover shadow-soft">
                       {userHits.map((u) => (
                         <li key={u.id}>
-                          <button type="button" onClick={() => addUser(u)} className="block w-full px-3 py-2 text-left text-sm hover:bg-muted">
+                          <button type="button" onMouseDown={(e) => { e.preventDefault(); addUser(u); }} onClick={(e) => e.preventDefault()} className="block w-full px-3 py-2 text-left text-sm hover:bg-muted">
                             <div className="font-medium">{u.nama_lengkap}</div>
                             <div className="text-[11px] text-muted-foreground">{u.jabatan ?? "-"} • {u.opd?.singkatan ?? u.opd?.nama ?? "Tanpa OPD"}</div>
                           </button>
