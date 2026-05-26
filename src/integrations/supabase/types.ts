@@ -1479,7 +1479,13 @@ export type Database = {
     }
     Enums: {
       absensi_tipe: "masuk" | "pulang"
-      app_role: "warga" | "admin_opd" | "super_admin" | "admin_desa" | "asn"
+      app_role:
+        | "warga"
+        | "admin_opd"
+        | "super_admin"
+        | "admin_desa"
+        | "asn"
+        | "admin_pemda"
       aset_status: "aktif" | "rusak" | "dihapuskan"
       job_status: "pending" | "running" | "success" | "failed" | "dead"
       status_permohonan: "baru" | "diproses" | "selesai" | "ditolak"
@@ -1611,7 +1617,14 @@ export const Constants = {
   public: {
     Enums: {
       absensi_tipe: ["masuk", "pulang"],
-      app_role: ["warga", "admin_opd", "super_admin", "admin_desa", "asn"],
+      app_role: [
+        "warga",
+        "admin_opd",
+        "super_admin",
+        "admin_desa",
+        "asn",
+        "admin_pemda",
+      ],
       aset_status: ["aktif", "rusak", "dihapuskan"],
       job_status: ["pending", "running", "success", "failed", "dead"],
       status_permohonan: ["baru", "diproses", "selesai", "ditolak"],
