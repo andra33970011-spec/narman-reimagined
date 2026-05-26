@@ -199,21 +199,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     roles,
     profile,
     loading,
-    isAdmin: roles.includes("admin_opd") || roles.includes("super_admin") || roles.includes("admin_desa"),
+    isAdmin: roles.includes("admin_opd") || roles.includes("super_admin") || roles.includes("admin_desa") || roles.includes("admin_pemda"),
     isSuperAdmin: roles.includes("super_admin"),
     isAdminDesa: roles.includes("admin_desa"),
     isAdminOpd: roles.includes("admin_opd"),
+    isAdminPemda: roles.includes("admin_pemda"),
     isAsn: roles.includes("asn"),
     isStaff:
       roles.includes("super_admin") ||
+      roles.includes("admin_pemda") ||
       roles.includes("admin_opd") ||
       roles.includes("admin_desa") ||
       roles.includes("asn"),
     isVerified:
       !!profile?.verified_at ||
       roles.includes("super_admin") ||
+      roles.includes("admin_pemda") ||
       roles.includes("admin_opd") ||
       roles.includes("admin_desa"),
+    permissions,
+    asnType,
+    systemPosition,
+    can: (p: string) => roles.includes("super_admin") || permissions.has(p),
     signOut: async () => {
       await supabase.auth.signOut();
     },
@@ -222,6 +229,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     },
     refreshProfile: async () => {
       if (user) await loadProfile(user.id);
+    },
+    refreshPermissions: async () => {
+      if (user) await loadPermissions(user.id);
     },
   };
 
