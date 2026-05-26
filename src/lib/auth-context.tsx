@@ -29,12 +29,19 @@ type AuthCtx = {
   isSuperAdmin: boolean;
   isAdminDesa: boolean;
   isAdminOpd: boolean;
+  isAdminPemda: boolean;
   isAsn: boolean;
   isStaff: boolean;
   isVerified: boolean;
+  // Fase 2 RBAC — granular permission & klasifikasi ASN
+  permissions: Set<string>;
+  asnType: AsnTypeValue | null;
+  systemPosition: SystemPositionValue | null;
+  can: (permission: string) => boolean;
   signOut: () => Promise<void>;
   refreshRoles: () => Promise<void>;
   refreshProfile: () => Promise<void>;
+  refreshPermissions: () => Promise<void>;
 };
 
 const Ctx = createContext<AuthCtx | undefined>(undefined);
@@ -44,6 +51,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [roles, setRoles] = useState<AppRole[]>([]);
   const [profile, setProfile] = useState<AuthProfile | null>(null);
+  const [permissions, setPermissions] = useState<Set<string>>(new Set());
+  const [asnType, setAsnType] = useState<AsnTypeValue | null>(null);
+  const [systemPosition, setSystemPosition] = useState<SystemPositionValue | null>(null);
   const [loading, setLoading] = useState(true);
 
   async function loadRoles(uid: string) {
@@ -53,10 +63,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   async function loadProfile(uid: string) {
     const { data } = await supabase
       .from("profiles")
-      .select("nama_lengkap,nik,no_hp,desa,verified_at,verified_by")
+      .select("nama_lengkap,nik,no_hp,desa,verified_at,verified_by,asn_type,system_position")
       .eq("id", uid)
       .maybeSingle();
-    setProfile((data as AuthProfile | null) ?? null);
+    const row = data as (AuthProfile & { asn_type?: AsnTypeValue | null; system_position?: SystemPositionValue | null }) | null;
+    setProfile(row ? {
+      nama_lengkap: row.nama_lengkap,
+      nik: row.nik,
+      no_hp: row.no_hp,
+      desa: row.desa,
+      verified_at: row.verified_at,
+      verified_by: row.verified_by,
+    } : null);
+    setAsnType(row?.asn_type ?? null);
+    setSystemPosition(row?.system_position ?? null);
+  }
+  async function loadPermissions(uid: string) {
+    const { data, error } = await supabase.rpc("get_effective_permissions", { _user_id: uid });
+    if (error) {
+      setPermissions(new Set());
+      return;
+    }
+    const codes = (data ?? [])
+      .map((r: { permission_code: string }) => r.permission_code)
+      .filter(Boolean);
+    setPermissions(new Set(codes));
   }
   // Catatan: auto-signOut pada login dihapus untuk mencegah user ter-logout
   // otomatis akibat race condition (roles/profile belum termuat) atau perubahan
